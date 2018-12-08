@@ -6,7 +6,7 @@ Desenvolva um programa que lide com três operações básicas que devem ser exe
 
 `N: Número de repetições desejado`
 
-`java -jar semaforos-v1.0.jar N`
+`java -jar semaforos-1.0.jar N`
 
 ### Código comentado:
 ~~~~
