@@ -14,19 +14,25 @@ public class Tarefa {
 		this.total = n;
 		for (int i = 0; i < this.total; i++) {
 			try {
+				// Adquire semáforo para controle das N iterações
 				semaforoControle.acquire();
+				// Inicia thread para imprimir Vermelho
 				ImpressorVermelho iVermelho = new ImpressorVermelho();
 				iVermelho.start();
+				
+				// Inicia thread para imprimir Azul
 				ImpressorAzul iAzul = new ImpressorAzul();
-				ImpressorVerde iVerde = new ImpressorVerde();
 				iAzul.start();
+				
+				// Inicia thread para imprimir Verde
+				ImpressorVerde iVerde = new ImpressorVerde();
 				iVerde.start();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} finally {
+				// Libera semáforo de controle para próxima iteração
 				semaforoControle.release();
 			}
-			System.out.println(i);
 		}
 	}
 
@@ -38,13 +44,17 @@ public class Tarefa {
 	public class ImpressorVermelho extends Thread {
 		public void run() {
 			try {
+				// Adquire semáforo para impressão de cor
 				semaforoImpressao.acquire();
+				// Sorteia um número aleatório entre 0 e 9
 				int x = new Random().nextInt(10);
+				// Espera x segundos
 				sleep(x * 1000);
 				System.out.println("Vermelho");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} finally {
+				// Libera semáforo de impressão de cor
 				semaforoImpressao.release();
 			}
 		}
@@ -53,8 +63,11 @@ public class Tarefa {
 	public class ImpressorAzul extends Thread {
 		public void run() {
 			try {
+				// Adquire semáforo para impressão de cor
 				semaforoImpressao.acquire();
+				// Sorteia um número aleatório entre 0 e 9
 				int x = new Random().nextInt(10);
+				// Espera x segundos
 				sleep(x * 1000);
 				System.out.println("Azul");
 			} catch (InterruptedException e) {
@@ -68,14 +81,18 @@ public class Tarefa {
 	public class ImpressorVerde extends Thread {
 		public void run() {
 			try {
+				// Adquire semáforo para impressão de cor
 				semaforoImpressao.acquire();
+				// Sorteia um número aleatório entre 0 e 9
 				int x = new Random().nextInt(10);
+				// Espera x segundos
 				sleep(x * 1000);
 				System.out.println("Verde");
 				System.out.println();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} finally {
+				// Libera semáforo de impressão de cor
 				semaforoImpressao.release();
 			}
 		}
